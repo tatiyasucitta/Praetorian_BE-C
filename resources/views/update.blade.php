@@ -24,7 +24,7 @@
     <form method="POST" action="{{route('updatebook', ['id' => $buku->id])}}" class="content">
         @csrf
         @method('PATCH')
-        <h2>Update Book Form</h2>
+        <h2>Formulir update</h2>
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Judul buku</span>
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="title" value="{{$buku->title}}">
