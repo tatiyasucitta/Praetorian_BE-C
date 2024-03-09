@@ -12,16 +12,22 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/addbook">Add Book</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-author-form">Create Author</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-category-form">Create New Category</a>
             </li>
           </div>
         </div>
     </nav>
 
-    <form method="POST" action="{{route('updatebook', ['id' => $buku->id])}}" class="content">
+    <form method="POST" action="{{route('updatebook', ['id' => $buku->id])}}" class="content" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <h2>Formulir update</h2>
@@ -37,6 +43,28 @@
             <span class="input-group-text" id="inputGroup-sizing-default">Stok buku</span>
             <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="stock" value="{{$buku->stock}}">
         </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Gambar buku</span>
+            <input type="file" class="form-control" name="bookpic" value="{{$buku->image}}">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Author Name</span>
+            <select class="form-select" aria-label="Default select example" name="author_id">
+                <option selected value={{$buku->author->id}}>{{$buku->author->author_name}}</option>
+                @foreach($authors as $author)
+                    <option value="{{$author->id}}">{{$author->author_name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <br>
+        @if($errors->any())
+            <li class="alert alert-danger" role="alert">
+                {{$errors->first()}}
+            </li>
+        @endif
+
         <button type="submit" class="btn btn-info">Submit</button>
     </form>
 

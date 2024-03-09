@@ -17,6 +17,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="/addbook">Add Book</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-author-form">Create Author</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-category-form">Create New Category</a>
+            </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -24,15 +30,24 @@
             </li>
         </ul>
     </nav>
+
     <div class="content">
         @foreach ($semuabuku as $buku)    
             <div class="card" style="width: 18rem;">
                 {{-- <img src="{{asset('pictures/harrypotter.jpg')}}" class="card-img-top" alt="..."> --}}
                 <div class="card-body">
+                    <img class="book-image" src="{{asset('storage/bookimage/images/'.$buku->image)}}" alt="">
                     <h5 class="card-title">{{$buku->title}}</h5>
                     <p>Rp. {{$buku->price}}</p>
                     <p>Stock: {{$buku->stock}}</p>
+                    <p style="color:green">Author: {{$buku->author->author_name}}</p>
+                    <h5>Category:</h5>
+                    @foreach ($buku->category as $c)
+                        <li>{{$c->categoryName}}</li>
+                    @endforeach
+                    <br>
                     <a href="{{route('updateform', ['id' => $buku->id])}}" class="btn btn-warning">Edit</a>
+                    <a href="{{route('add.category', ['id' => $buku->id])}}" class="btn btn-success">Add Category</a>
                     {{-- shift + alt + arrow bawah --}}
                     <form method="POST" action="{{route('delete', ['id'=> $buku->id])}}">
                         @csrf

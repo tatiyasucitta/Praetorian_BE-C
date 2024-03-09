@@ -15,10 +15,10 @@
                 <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="/addbook">Add Book</a>
+                <a class="nav-link" href="/addbook">Add Book</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/create-author-form">Create Author</a>
+                <a class="nav-link" href="/create-author-form">Create Author</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/create-category-form">Create New Category</a>
@@ -26,40 +26,34 @@
           </div>
         </div>
     </nav>
-    <form method="POST" action="{{route('createbook')}}" class="content" enctype="multipart/form-data">
+
+    <form method="POST" action="{{route('add.category.book', ['id' => $buku->id])}}" class="content">
         @csrf
-        <h2>Add Book Form</h2>
+        <h2>Formulir Add Category to Book</h2>
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Judul buku</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="title">
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="title" value="{{$buku->title}}">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Harga buku</span>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="price">
+            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="price" value="{{$buku->price}}">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Stok buku</span>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="stock">
+            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="stock" value="{{$buku->stock}}">
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Gambar buku</span>
-            <input type="file" class="form-control" name="bookpic">
+            <span class="input-group-text" id="inputGroup-sizing-default">Author Name : {{$buku->author->author_name}}</span>
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Author Name</span>
-            <select class="form-select" aria-label="Default select example" name="author_id">
+            <span class="input-group-text" id="inputGroup-sizing-default">Category List</span>
+            <select class="form-select" aria-label="Default select example" name="cat_id">
                 <option selected>Open this select menu</option>
-                @foreach($authors as $author)
-                    <option value="{{$author->id}}" >{{$author->author_name}}</option>
+                @foreach($categories as $c)
+                    <option value="{{$c->id}}">{{$c->categoryName}}</option>
                 @endforeach
             </select>
         </div>
-        <br>
-        @if($errors->any())
-            <li class="alert alert-danger" role="alert">
-                {{$errors->first()}}
-            </li>
-        @endif
         <button type="submit" class="btn btn-info">Submit</button>
     </form>
 

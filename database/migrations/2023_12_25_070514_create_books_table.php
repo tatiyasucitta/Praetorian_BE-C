@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('stock');
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('authors')->onupdate('cascade')->ondelete('cascade');
             $table->timestamps();
         });
     }
