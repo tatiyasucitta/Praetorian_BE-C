@@ -15,16 +15,23 @@
                 <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/addbook">Add Book</a>
+                <a class="nav-link" href="{{route('add.book.form')}}">Add Book</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/create-author-form">Create Author</a>
+                <a class="nav-link" href="{{route('create.form')}}">Create Author</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/create-category-form">Create New Category</a>
+                <a class="nav-link" href="{{route('create.cat.form')}}">Create New Category</a>
             </li>
-          </div>
-        </div>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button class="btn btn-danger">Logout</button>
+                </form>
+            </li>
+        </ul>
     </nav>
 
     <form method="POST" action="{{route('updatebook', ['id' => $buku->id])}}" class="content" enctype="multipart/form-data">
