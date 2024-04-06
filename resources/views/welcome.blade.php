@@ -27,10 +27,19 @@
             @endif
         </ul>
         <ul class="navbar-nav">
+<<<<<<< HEAD
             <form action="{{route('logout')}}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
+=======
+            <li class="nav-item">
+                <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button class="btn btn-danger">Logout</button>
+                </form>
+            </li>
+>>>>>>> 6e4e55f5d61393730f16ab677527c73693f81130
         </ul>
     </nav>
 
